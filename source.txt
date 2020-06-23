@@ -1,0 +1,10 @@
+fibo1 hello00011
+   fibo2 world00011
+   fibo3 perekopskyi
+  yevhenii
+ fibo5  vadimovich
+  Евгений   
+   Вадимович  
+fibo8 Перекопский
+Василий
+Олег
