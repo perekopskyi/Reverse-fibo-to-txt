@@ -1,33 +1,23 @@
 const fs = require("fs");
 
-const file = "./source.txt";
-const dataFromFile = fs.readFileSync(file);
+const SOURCE = "./source.txt";
+const OUTPUT = "./output.txt";
 
-const textArray = dataFromFile
-  .toString()
-  .split("\n")
-  .map((row) => {
-    return row.trim();
-  });
+function readStringsFromFile(path) {
+  const dataFromFile = fs.readFileSync(path);
+  return dataFromFile
+    .toString()
+    .split("\n")
+    .map((row) => {
+      return row.trim();
+    });
+}
 
-const fiboNumbers = fibo(textArray.length - 1);
-
-const fiboStrings = fiboNumbers.map((fibo) => textArray[fibo - 1]);
-
-const reverseFiboStrings = fiboStrings.map((item) => reverseString(item));
-
-const resultData = reverseFiboStrings.join("\n");
-
-// write to output.txt
-fs.writeFile("./output.txt", resultData, (err) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-  // file successfully recorded
-});
-
-// function that receives the array's length and returns the fibonacci numbers
+/**
+ * Function that returns the fibonacci numbers
+ * that do not exceed the number of rows in the array
+ * @param {number} length of array
+ */
 function fibo(length) {
   const array = [];
 
@@ -64,3 +54,26 @@ function reverseString(string) {
 
   return newString;
 }
+
+function writeStringsToFile(text) {
+  fs.writeFile(OUTPUT, text, (err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    // file successfully recorded
+  });
+}
+
+// Read file and returned array of strings
+const textArray = readStringsFromFile(SOURCE);
+// Find Fibo numbers that do not exceed the number of rows in the array
+const fiboNumbers = fibo(textArray.length - 1);
+// Find rows corresponding to the fibonacci numbers
+const fiboStrings = fiboNumbers.map((fibo) => textArray[fibo - 1]);
+// Create array of reversed Fibo Strings
+const reversedFiboStringsArray = fiboStrings.map((item) => reverseString(item));
+// Join array items into text
+const resultText = reversedFiboStringsArray.join("\n");
+
+writeStringsToFile(resultText);

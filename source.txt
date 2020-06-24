@@ -1,5 +1,5 @@
-fibo1 hello00011
-   fibo2 world00011
+fibo1 hello
+   fibo2 world
    fibo3 perekopskyi
   yevhenii
  fibo5  vadimovich
